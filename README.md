@@ -14,6 +14,7 @@ conda env create -f conda_env.yml
 conda activate rlvlmf
 conda install -y pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch  
 pip install numpy==1.26.0
+pip install scipy==1.10.1 moviepy==1.0.3  # compatible with gym 0.25 / scipy import paths / moviepy.editor
 ```
 
 We use customized softgym envs (for cloth fold and straighten rope), as provided in `softgym` folder. Please refer to https://github.com/Xingyu-Lin/softgym?tab=readme-ov-file for compiling softgym. 
