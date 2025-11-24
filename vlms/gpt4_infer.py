@@ -2,15 +2,25 @@ from openai import OpenAI
 import base64
 import os
 
-list_of_api_keys = [
-   os.environ['OPENAI_API_KEY'],
-]
+# Lazily create client to avoid failures when key is unset or unused.
+list_of_api_keys = []
+if "OPENAI_API_KEY" in os.environ:
+    list_of_api_keys = [os.environ["OPENAI_API_KEY"]]
 
 global api_key_idx, cnt
 api_key_idx = 0
 cnt = 0
-os.environ['OPENAI_API_KEY'] = list_of_api_keys[api_key_idx]
-client = OpenAI()
+client = None
+
+def get_client():
+    """Create or reuse OpenAI client; errors if no key is set."""
+    global client
+    if client is None:
+        if not list_of_api_keys:
+            raise RuntimeError("OPENAI_API_KEY is not set")
+        os.environ["OPENAI_API_KEY"] = list_of_api_keys[api_key_idx]
+        client = OpenAI()
+    return client
 
 def encode_image(image_path):
   with open(image_path, "rb") as image_file:
@@ -19,7 +29,7 @@ def encode_image(image_path):
 def api_call(img_path, prompt, temperature=0):
     base64_image = encode_image(img_path)
 
-    response = client.chat.completions.create(
+    response = get_client().chat.completions.create(
             model="gpt-4-vision-preview",
             messages=[
                 {
@@ -50,7 +60,7 @@ def api_call_2(img1_path, img2_path, prompt, temperature=0):
     base64_image1 = encode_image(img1_path)
     base64_image2 = encode_image(img2_path)
 
-    response = client.chat.completions.create(
+    response = get_client().chat.completions.create(
             model="gpt-4-vision-preview",
             messages=[
                 {
@@ -102,7 +112,7 @@ Image 2:
     return response
 
 def extract_answer(vision_response, summary_prompt, temperature=0):
-    summary_response = client.chat.completions.create(
+    summary_response = get_client().chat.completions.create(
         model="gpt-4",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
