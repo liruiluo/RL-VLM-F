@@ -25,6 +25,7 @@ python train_PEBBLE.py \
   reward=learn_from_preference \
   vlm=gemini_free_form \
   vlm_label=1 \
+  segment=1 \
   image_reward=1 \
   reward_batch=40 \
   reward_update=5 \
