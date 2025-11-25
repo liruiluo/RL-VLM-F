@@ -710,6 +710,14 @@ class RewardModel:
                     except:
                         res = -1
                     vlm_labels.append(res)   
+            elif self.vlm == "smolvlm_vllm":
+                from vlms.smolvlm_vllm import smolvlm_pair_preference
+                vlm_labels = []
+                for idx, (img1, img2) in enumerate(zip(img_t_1, img_t_2)):
+                    res = smolvlm_pair_preference(
+                        img1, img2, gemini_free_query_env_prompts[self.env_name]
+                    )
+                    vlm_labels.append(res)
 
             vlm_labels = np.array(vlm_labels).reshape(-1, 1)
             good_idx = (vlm_labels != -1).flatten()
