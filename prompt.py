@@ -5,6 +5,16 @@ clip_env_prompts = {
     "metaworld_drawer-open-v2": "The drawer is opened.", # let's try the flipped version.
     "metaworld_door-open-v2": "The safe door is opened.", # let's try the flipped version.
     "metaworld_soccer-v2": "The soccer ball is in the goal.", # not solved, there is reward issue
+    "metaworld_hammer-v3-goal-observable": "a robot gripper hammering a screw on the wall.",
+    "metaworld_push-wall-v3-goal-observable": "a robot gripper bypassing a wall and pushing a cylinder.",
+    "metaworld_faucet-close-v3-goal-observable": "a robot gripper rotating the faucet clockwise.",
+    "metaworld_push-back-v3-goal-observable": "a robot gripper pushing the wooden block backward.",
+    "metaworld_stick-pull-v3-goal-observable": "a robot gripper grasping a cuboid and pulling a kettle with the cuboid.",
+    "metaworld_handle-press-side-v3-goal-observable": "a robot gripper pressing a handle down sideways.",
+    "metaworld_push-v3-goal-observable": "a robot gripper pushing a cylinder.",
+    "metaworld_shelf-place-v3-goal-observable": "a robot gripper picking and placing a cube onto a shelf.",
+    "metaworld_window-close-v3-goal-observable": "a robot gripper pushing and closing a window.",
+    "metaworld_peg-unplug-side-v3-goal-observable": "a robot gripper unpluging a peg sideways.",
 
     "CartPole-v1": "pole vertically upright on top of the cart.",
     
@@ -19,6 +29,16 @@ goal_env_prompts = {
     "metaworld_drawer-open-v2": "to open the drawer", # let's try the flipped version.
     "metaworld_door-open-v2": "to open the safe door", # let's try the flipped version.
     "metaworld_soccer-v2": "to move the soccer ball into the goal", # not solved, there is reward issue
+    "metaworld_hammer-v3-goal-observable": "to hammer a screw on the wall",
+    "metaworld_push-wall-v3-goal-observable": "to bypass the wall and push the cylinder",
+    "metaworld_faucet-close-v3-goal-observable": "to rotate the faucet clockwise to close it",
+    "metaworld_push-back-v3-goal-observable": "to push the wooden block backward to the target",
+    "metaworld_stick-pull-v3-goal-observable": "to grasp the stick and pull the kettle to the target",
+    "metaworld_handle-press-side-v3-goal-observable": "to press the side handle downward",
+    "metaworld_push-v3-goal-observable": "to push the cylinder to the target",
+    "metaworld_shelf-place-v3-goal-observable": "to pick and place the cube onto the shelf",
+    "metaworld_window-close-v3-goal-observable": "to push and fully close the window",
+    "metaworld_peg-unplug-side-v3-goal-observable": "to unplug the peg sideways from the socket",
     "CartPole-v1": "to balance the brown pole on the black cart to be upright",
     "softgym_RopeFlattenEasy": "to straighten the blue rope",
     "softgym_PassWater": "to move the container, which holds water, to be as close to the red circle as possible without causing too many water droplets to spill",

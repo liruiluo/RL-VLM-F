@@ -27,6 +27,7 @@ vllm serve HuggingFaceTB/SmolVLM2-500M-Video-Instruct \
   --trust-remote-code \
   --max-model-len 4096 \
   --port 8000 \
+  --gpu-memory-utilization 0.3 \
   --api-key test-key
 ```
 Keep this process running; first run will download model weights.

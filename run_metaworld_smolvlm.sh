@@ -51,7 +51,7 @@ for task in "${TASKS[@]}"; do
       gradient_update=1 activation=tanh num_unsup_steps=9000 \
       feed_type=0 teacher_beta=-1 teacher_gamma=1 teacher_eps_mistake=0 teacher_eps_skip=0 teacher_eps_equal=0 \
       num_eval_episodes=1 \
-      cached_label_path=None \
+      cached_label_path=null \
       exp_name=smolvlm_vllm
   done
 done

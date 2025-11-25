@@ -243,7 +243,11 @@ class RewardModel:
         
         file_path = os.path.abspath(__file__)
         dir_path = os.path.dirname(file_path)
-        self.cached_label_path = "{}/{}".format(dir_path, cached_label_path)
+        # handle cached label path (None or string variants)
+        if cached_label_path in [None, "None", "null", "Null", ""]:
+            self.cached_label_path = None
+        else:
+            self.cached_label_path = "{}/{}".format(dir_path, cached_label_path)
         self.read_cache_idx = 0
         if self.cached_label_path is not None:
             all_cached_labels = sorted(os.listdir(self.cached_label_path))

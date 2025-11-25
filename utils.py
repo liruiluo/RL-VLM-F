@@ -42,10 +42,12 @@ def tie_weights(src, trg):
     
 def make_metaworld_env(cfg):
     env_name = cfg.env.replace('metaworld_','')
+    if env_name.endswith("-v3-goal-observable"):
+        env_name = env_name.replace("-v3-goal-observable", "-v2")
     if env_name in _env_dict.ALL_V2_ENVIRONMENTS:
         env_cls = _env_dict.ALL_V2_ENVIRONMENTS[env_name]
     else:
-        env_cls = _env_dict.ALL_V1_ENVIRONMENTS[env_name]
+        raise ValueError(f"Unknown MetaWorld env: {env_name}")
     
     env = env_cls(render_mode='rgb_array')
     env.camera_name = env_name
