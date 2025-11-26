@@ -498,6 +498,8 @@ class Workspace(object):
                     self.reward_model.eval()
                     reward_hat = self.reward_model.r_hat(image)
                     self.reward_model.train()
+                # combine learned reward with environment reward
+                reward_hat = reward_hat*0.1 + reward
             elif self.reward == 'blip2_image_text_matching':
                 query_image = rgb_image
                 query_prompt = clip_env_prompts[self.cfg.env] 
