@@ -6,6 +6,9 @@ set -e
 PYTHONPATH="${PYTHONPATH:-$PWD}"
 export PYTHONPATH
 export MUJOCO_GL="${MUJOCO_GL:-egl}"
+# dummy keys to avoid import-time checks in VLM modules
+export GEMINI_API_KEY="${GEMINI_API_KEY:-dummy}"
+export OPENAI_API_KEY="${OPENAI_API_KEY:-dummy}"
 
 TASKS=(
   hammer-v3-goal-observable

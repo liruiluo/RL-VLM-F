@@ -12,6 +12,7 @@ import argparse
 import glob
 import os
 import pandas as pd
+import csv
 
 
 DEFAULT_TASKS = [
@@ -40,10 +41,11 @@ def load_last_success(csv_path: str, column: str) -> float:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--exp-root", default="exp/smolvlm_vllm", help="Root exp dir")
+    ap.add_argument("--exp-root", default="exp/gt_task_reward", help="Root exp dir")
     ap.add_argument("--column", default="true_episode_success", help="Metric column to aggregate")
     ap.add_argument("--tasks", nargs="+", default=DEFAULT_TASKS, help="Task names without 'metaworld_' prefix")
     ap.add_argument("--pattern", default="**/train.csv", help="Glob pattern under each task dir")
+    ap.add_argument("--output-csv", default="summary.csv", help="Path to save CSV summary (default: summary.csv)")
     args = ap.parse_args()
 
     results = []
@@ -71,6 +73,15 @@ def main():
         mean_of_means = sum(r[2] for r in results) / len(results)
         mean_of_stds = sum(r[3] for r in results) / len(results)
         print(f"\nAcross tasks: mean of means = {mean_of_means:.4f}, mean of stds = {mean_of_stds:.4f}")
+        with open(args.output_csv, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["task", "n", "mean", "std"])
+            for r in results:
+                writer.writerow(r)
+            writer.writerow([])
+            writer.writerow(["mean_of_means", "", mean_of_means, ""])
+            writer.writerow(["mean_of_stds", "", mean_of_stds, ""])
+        print(f"Saved summary to {args.output_csv}")
     else:
         print("No results aggregated.")
 
